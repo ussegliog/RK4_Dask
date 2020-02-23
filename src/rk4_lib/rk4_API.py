@@ -18,17 +18,17 @@ def rk4_API (ind, t0, x0, v0, tmax, dt):
 #
   
 
-  print ( '' )
-  print ( 'RK4_API' )
-  print ( '  Python version: %s' % ( platform.python_version ( ) ) )
-  print ( '  RK4API takes one Runge-Kutta step for a vector ODE.' )
+  #print ( '' )
+  #print ( 'RK4_API' )
+  #print ( '  Python version: %s' % ( platform.python_version ( ) ) )
+  #print ( '  RK4API takes one Runge-Kutta step for a vector ODE.' )
 
   n = 2
  
 
-  print ( '' )
-  print ( '          T          U1(T)            U2(T)' )
-  print ( '' )
+  #print ( '' )
+  #print ( '          T          U1(T)            U2(T)' )
+  #print ( '' )
 
   
   i = 0
@@ -41,7 +41,7 @@ def rk4_API (ind, t0, x0, v0, tmax, dt):
 #
 #  Print (T0,U0).
 #
-    print ( '  %4d  %14.6g  %14.6g  %14.6g' % ( i, t0, u0[0], u0[1] ) )
+    #print ( '  %4d  %14.6g  %14.6g  %14.6g' % ( i, t0, u0[0], u0[1] ) )
 #
 #  Stop if we've exceeded TMAX.
 #
@@ -63,9 +63,9 @@ def rk4_API (ind, t0, x0, v0, tmax, dt):
 #
 #  Terminate.
 #
-  print ( '' )
-  print ( 'RK4VEC_TEST:' )
-  print ( '  Normal end of execution.' )
+  #print ( '' )
+  #print ( 'RK4VEC_TEST:' )
+  #print ( '  Normal end of execution.' )
   return u0
 
 def rk4_f ( t, n, u ):
