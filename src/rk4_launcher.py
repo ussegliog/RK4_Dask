@@ -11,6 +11,7 @@ import rk4_lib.rk4_API as rk4API
 import rk4_lib.rk4 as rk4
 
 # Dask imports
+import dask
 import dask.dataframe as dd
 import dask.array as da
 from dask_jobqueue import PBSCluster
@@ -24,19 +25,31 @@ def my_costly_simulation(line):
     print(line.compute()[0])
     return sum(line)
 
+def build_rk4_result(line_in, res_u0):
+    """Copy and build a result vector
+    """
+    # Get collection (array, here)
+    line_array = line_in.compute()
+
+    # Update values (for x1 and v1)
+    line_array[1] = res_u0[0]
+    line_array[2] = res_u0[1]
+
+    return line_array
+
 # Launch rk4_API for each object (aka line or Rk4Data)
 def launch_rk4_API(line):
-    # Get The array inside the Dask array line
-    npArray = line.compute()
+
     # Launch with each elt of the array, rk4_API
-    u0 = rk4API.rk4_API(npArray[0], npArray[1], npArray[2], npArray[3], npArray[4], npArray[5])
-    # Copy elts into res
-    res = npArray.copy()
-    # Update x1 and v1 into res
-    res[1] = u0[0]
-    res[2] = u0[1]
+    u0 = dask.delayed(rk4API.rk4_API)(*line)
+
+    # Compute res (action)
+    res = u0.compute()
+
+    line_out = build_rk4_result(line, res)
+
     # Return a dask array
-    return da.from_array(res)
+    return da.from_array(line_out)
 
 
 

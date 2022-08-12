@@ -5,7 +5,7 @@ import rk4_lib.rk4 as rk4
 import numpy as np
 import platform
 
-def rk4_API (ind, t0, x0, v0, tmax, dt):
+def rk4_API (*args):
 
     #*****************************************************************************80
     #
@@ -22,6 +22,13 @@ def rk4_API (ind, t0, x0, v0, tmax, dt):
     #print ( 'RK4_API' )
     #print ( '  Python version: %s' % ( platform.python_version ( ) ) )
     #print ( '  RK4API takes one Runge-Kutta step for a vector ODE.' )
+
+    ind = args[0]
+    t0 = args[1]
+    x0 = args[2]
+    v0 = args[3]
+    tmax = args[4]
+    dt = args[5]
 
     n = 2
 
